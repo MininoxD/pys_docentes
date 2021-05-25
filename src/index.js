@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import { FirebaseAppProvider } from 'reactfire';
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor, store } from './store';
+const firebase = JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG)
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <FirebaseAppProvider firebaseConfig={firebase} suspense={true}>
+    <Suspense fallback={'cargandoooooo'}>
+      <Provider store={store}>
+        <PersistGate loading={<p>Cargandooo</p>} persistor={persistor}>
+          <React.StrictMode>
+            <App />
+          </React.StrictMode>
+        </PersistGate>
+      </Provider>
+    </Suspense>
+  </FirebaseAppProvider>,
   document.getElementById('root')
 );
 
