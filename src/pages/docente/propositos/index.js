@@ -4,11 +4,11 @@ import { useParams } from 'react-router'
 import { DELETE_PROPOSITO, ONE_PROYECTO } from '../../../queryApollo/query'
 import HeaderPropositos from './header'
 import CardCurso from './cardCurso'
-import { GridPropositos } from './style'
+import { GridPropositos, TituloSecuencia } from './style'
 import Addproposito from './addProposito'
 import { GridSecActividades } from './cardSecActividades/style'
 import CardSecActividades from './cardSecActividades'
-const Propositos = () => {
+const Propositos = ({autor=true}) => {
   const {id} = useParams()
   const { loading, error, data } = useQuery(ONE_PROYECTO, { variables: { id}});
   const[deleteProposito] =  useMutation(DELETE_PROPOSITO,{refetchQueries:[{
@@ -28,7 +28,8 @@ const Propositos = () => {
 
   return (
     <>
-      <HeaderPropositos nombre={nombre} situacion={situacion} enfoque={enfoque} onShow={() => setModalShow(true)}/>
+      <HeaderPropositos autor={autor} nombre={nombre} situacion={situacion} enfoque={enfoque} onShow={() => setModalShow(true)}/>
+      <TituloSecuencia>Secuencia de Activiades</TituloSecuencia>
       <GridSecActividades>
         {
           secuensia_actividades.map((sa,i)=>{
@@ -39,6 +40,7 @@ const Propositos = () => {
     <GridPropositos>
       {
           propositos.map((p, i) => <CardCurso
+          autor={autor}
           key={i}
           {...p}
           onEdit={() => setModalShow(true)}
@@ -46,7 +48,9 @@ const Propositos = () => {
             onDelete={() => onDelete(p._id)}/>)
       }
     </GridPropositos>
-      <Addproposito show={modalShow} onHide={() => setModalShow(false)} editData={editData} />
+      {
+        autor && <Addproposito show={modalShow} onHide={() => setModalShow(false)} editData={editData} clear={() => setEditData(null)} />
+      }
     </>
   )
 }

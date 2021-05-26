@@ -8,6 +8,8 @@ import Proyectos from "../pages/docente/proyectos";
 import Propositos from '../pages/docente/propositos'
 import Datos from "../pages/docente/datos";
 import Perfil from "../pages/docente/perfil";
+import Searchperfil from '../pages/searchPerfil'
+import Searchdatos from '../pages/searchPerfil/searchDatos'
 const redirect = (rol) => {
   switch (rol) {
     case 1:
@@ -61,6 +63,24 @@ export const routes = (loginRol) =>{
             {
               path: '/:id/:idp',
               element: <Datos/>
+            }
+          ]
+        },
+        {
+          path: '/perfil/:id_d',
+          element: loginRol === 1 ? <Searchperfil/>: <Navigate to='/' replace={true} />,
+          children: [
+            {
+              path: '/',
+              element: <Searchdatos/>
+            },
+            {
+              path: '/:id',
+              element: <Propositos autor={false} />
+            },
+            {
+              path: '/:id/:idp',
+              element: <Datos autor={false}/>
             }
           ]
         }

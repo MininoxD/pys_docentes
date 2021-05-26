@@ -83,3 +83,11 @@ export const BodyProposito = styled.div`
     font-size: .8rem;
   }
 `
+export const TituloSecuencia=  styled.h2`
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight:600;
+  font-style: oblique;
+  text-transform:uppercase;
+  color: ${({ theme }) => theme.primary};
+`

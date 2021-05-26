@@ -8,7 +8,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { ADD_PROPOSITO, GET_PROFILE, ONE_PROYECTO, UPDATE_PROPOSITO } from '../../../queryApollo/query';
 import { useParams } from 'react-router';
 import { Skeleton } from 'antd';
-const Addproposito = ({ show, onHide, editData = null}) => {
+const Addproposito = ({ show, onHide, editData = null, clear}) => {
   const {id} = useParams()
   const [defecto, setDefecto] = useState('selecciones una opcion')
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
@@ -17,7 +17,6 @@ const Addproposito = ({ show, onHide, editData = null}) => {
   if (editData) {
     setValue("area", editData.area)
     setValue("competencia", editData.competencia)
-    setValue("estandar", editData.estandar)
     setValue("instrumento_evaluacion", editData.instrumento_evaluacion)
   }
   const [addProposito] = useMutation(ADD_PROPOSITO, {
@@ -40,6 +39,7 @@ const Addproposito = ({ show, onHide, editData = null}) => {
       input: data
     }})
     onHide()
+    clear()
   };
 
   const onChange =(valor)=>{

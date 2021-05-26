@@ -10,10 +10,9 @@ import { Popconfirm } from 'antd';
 import Addproyecto from '../pages/docente/proyectos/addProyecto';
 import { useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
-import { refreshUser } from '../store/token';
+
 
 const Getproyectos = () => {
-  const dispatch = useDispatch()
   const navigate = useNavigate()
   /* Modal setings */
   const [modalShow, setModalShow] = useState(false);

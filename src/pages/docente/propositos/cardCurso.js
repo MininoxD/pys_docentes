@@ -5,7 +5,7 @@ import { RiDeleteBin6Fill } from 'react-icons/ri'
 import { AiFillEdit } from 'react-icons/ai'
 import { Popconfirm } from 'antd'
 import { useNavigate } from 'react-router'
-const CardCurso = ({ _id,area, competencia, estandar, onEdit, onSetEdit, onDelete}) => {
+const CardCurso = ({ _id,area, competencia, estandar, onEdit, onSetEdit, onDelete,autor}) => {
   const navigate = useNavigate()
   const confirmEdit = ()=>{
       onSetEdit()
@@ -26,24 +26,29 @@ const CardCurso = ({ _id,area, competencia, estandar, onEdit, onSetEdit, onDelet
           <span>{area}</span>
           <OptionsProposito>
             <OptionProposito onClick={() => navigate(`${_id}`)} ><IoEyeSharp/></OptionProposito>
-            <Popconfirm
-              title="¿desea editar esta Unidad?"
-              onConfirm={confirmEdit}
-              onCancel={cancelEdit}
-              okText="Si"
-              cancelText="Cancelar"
-            >
-              <OptionProposito><AiFillEdit/></OptionProposito>
-            </Popconfirm>
-            <Popconfirm
-              title="¿desea eliminar esta Unidad?"
-              onConfirm={confirmDelete}
-              onCancel={cancelEdit}
-              okText="Si"
-              cancelText="Cancelar"
-            >
-              <OptionProposito><RiDeleteBin6Fill/></OptionProposito>
-            </Popconfirm>
+            {
+              autor &&
+              <>
+              <Popconfirm
+                title="¿desea editar esta Unidad?"
+                onConfirm={confirmEdit}
+                onCancel={cancelEdit}
+                okText="Si"
+                cancelText="Cancelar"
+              >
+                <OptionProposito><AiFillEdit/></OptionProposito>
+              </Popconfirm>
+              <Popconfirm
+                title="¿desea eliminar esta Unidad?"
+                onConfirm={confirmDelete}
+                onCancel={cancelEdit}
+                okText="Si"
+                cancelText="Cancelar"
+              >
+                <OptionProposito><RiDeleteBin6Fill/></OptionProposito>
+              </Popconfirm>
+              </>
+            }
           </OptionsProposito>
         </BoxHeader>
         <BodyProposito>

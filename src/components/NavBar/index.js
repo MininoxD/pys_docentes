@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { LogOut } from '../../store/user'
 import { useNavigate } from 'react-router'
 import gez from '../../statics/img/gez.svg'
+import ProfileSearch from './profileSearch'
+import Usuario from '../../statics/img/usuario.svg'
 const NavHeader = () => {
   const navigate = useNavigate()
   const {nombre} = useSelector(state => state.user)
@@ -51,7 +53,10 @@ const NavHeader = () => {
           </Logo>
           <Items>
             <li>
-            <Avatar size={40} src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+            <ProfileSearch />
+            </li>
+            <li>
+            <Avatar size={40} src={Usuario} />
             </li>
           <li className="grande"><p>{nombre}</p></li>
             <li>

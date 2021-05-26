@@ -6,9 +6,9 @@ import { useForm } from 'react-hook-form';
 import { useMutation } from '@apollo/client';
 import { ADD_SESION, ONE_PROPOSITO, ONE_PROYECTO, UPDATE_SESION } from '../../../queryApollo/query';
 import { useParams } from 'react-router';
-const Addsesion = ({ editData = null, show, onHide}) => {
+const Addsesion = ({ editData = null, show, onHide, clear}) => {
   const {id,idp} = useParams()
-  const { register, handleSubmit, formState: { errors }, setValue } = useForm();
+  const { register, handleSubmit, formState: { errors }, setValue} = useForm();
   const [addSesion] = useMutation(ADD_SESION, {
     refetchQueries: [{
       query: ONE_PROPOSITO,
@@ -44,6 +44,7 @@ const Addsesion = ({ editData = null, show, onHide}) => {
       }
     })
     onHide()
+    clear()
   }
 
   return (

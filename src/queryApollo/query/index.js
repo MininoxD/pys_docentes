@@ -395,3 +395,34 @@ export const UPDATE_SESION = gql`
     }
   }
 `
+export const SEARCH_DOCENTE = gql`
+  query SearchDocente($input: String!){
+    searchDocentes(input: $input){
+      _id
+      nombres
+      ie
+    }
+  }
+`
+
+/* search Profile */
+
+export const GET_DOCENTE_ID = gql`
+  query GetDocenteId($id: String!){
+    getDocenteId(_id: $id){
+      _id
+      nombres
+      ie
+      grado
+      proyectos{
+        _id
+        nombre
+        grado
+        fecha_inicio
+        fecha_fin
+        enfoque
+        situacion
+      }
+    }
+  }
+`

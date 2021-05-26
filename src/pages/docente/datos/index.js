@@ -8,7 +8,7 @@ import { GridDatos } from './style'
 import { Skeleton } from 'antd'
 import Multiplecardtwo from './multipleCardTwo'
 import Adddatos from './addDatos'
-const Datos = () => {
+const Datos = ({autor=true}) => {
   const { idp } = useParams()
   const { loading, error, data } = useQuery(ONE_PROPOSITO, { variables: { id: idp } });
   const [tipo, setTipo] = useState(1)
@@ -17,6 +17,10 @@ const Datos = () => {
     return(
       <Skeleton active />
     )
+  }
+
+  if (error){
+    return <h1>Actualizando...</h1>
   }
   const {
     area,
@@ -38,17 +42,19 @@ const Datos = () => {
    }
   return (
     <>
-    <HeaderDatos area={area} competencia={competencia} estandar={estandar} instrumento_evaluacion={instrumento_evaluacion}/>
+    <HeaderDatos autor={autor} area={area} competencia={competencia} estandar={estandar} instrumento_evaluacion={instrumento_evaluacion}/>
     <GridDatos>
-        <MultipleCard tipo={1} titulo="Capacidades" datos={capacidades} addItem={() => onFormAdd(1)}/>
-        <MultipleCard tipo={2} titulo="Criterios" datos={criterios} addItem={() => onFormAdd(2)}/>
-        <MultipleCard tipo={3} titulo="Desempeños" datos={desenpenos} addItem={() => onFormAdd(3)}/>
-        <MultipleCard tipo={4} titulo="Evidencias" datos={evidencias} addItem={() => onFormAdd(4)}/>
-        <MultipleCard tipo={5} titulo="Metas" datos={metas} addItem={() => onFormAdd(5)} />
-        <Adddatos tipo={tipo} show={modalForm} onHide={()=>setModalForm(false)}/>
+        <MultipleCard autor={autor} tipo={1} titulo="Capacidades" datos={capacidades} addItem={() => onFormAdd(1)}/>
+        <MultipleCard autor={autor} tipo={2} titulo="Criterios" datos={criterios} addItem={() => onFormAdd(2)}/>
+        <MultipleCard autor={autor} tipo={3} titulo="Desempeños" datos={desenpenos} addItem={() => onFormAdd(3)}/>
+        <MultipleCard autor={autor} tipo={4} titulo="Evidencias" datos={evidencias} addItem={() => onFormAdd(4)}/>
+        <MultipleCard autor={autor} tipo={5} titulo="Metas" datos={metas} addItem={() => onFormAdd(5)} />
+        {
+          autor && <Adddatos tipo={tipo} show={modalForm} onHide={() => setModalForm(false)} />
+        }
     </GridDatos>
     <GridDatos>
-        <Multiplecardtwo titulo="Sesiones" datos={sesiones}/>
+        <Multiplecardtwo autor={autor} titulo="Sesiones" datos={sesiones}/>
     </GridDatos>
     </>
   )

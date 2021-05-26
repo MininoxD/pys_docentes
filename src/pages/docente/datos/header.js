@@ -2,14 +2,15 @@ import React from 'react'
 import { Descriptions,  PageHeader } from 'antd'
 import { ContainerDatosHeader } from './style'
 import { useNavigate, useParams } from 'react-router'
-const HeaderDatos = ({ area, competencia, estandar, instrumento_evaluacion}) => {
+const HeaderDatos = ({ area, competencia, estandar, instrumento_evaluacion, autor}) => {
   const {id} = useParams()
+  const {id_d} = useParams()
   const navigate = useNavigate()
   return (
     <ContainerDatosHeader>
       <PageHeader
         className="site-page-header"
-        onBack={() => navigate(`/docente/${id}`)}
+        onBack={() => navigate(autor ? `/docente/${id}` : `/perfil/${id_d}/${id}`)}
         title={`${area}`}
       />
       <Descriptions title="Decripcion del Proposito" bordered>

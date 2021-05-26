@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { AutoComplete } from 'antd';
 
 export let HeaderNav = styled.div`
-  padding: .5rem 2rem;
+  padding: .3rem .3rem;
   box-sizing: border-box;
   height: 5rem;
   background-color:${({ theme }) => theme.secondary};
@@ -9,6 +10,10 @@ export let HeaderNav = styled.div`
   position: sticky;
   z-index: 4;
   top: 0;
+
+  @media screen and (min-width: 760px) {
+    padding: .5rem 2rem;
+  }
 `
 export let NavBar = styled.nav`
   width:100%;
@@ -19,6 +24,7 @@ export let NavBar = styled.nav`
 `
 export let Logo = styled.div`
   display:flex;
+  display: none;
   align-items:center;
   & span{
     height:3rem;
@@ -29,6 +35,11 @@ export let Logo = styled.div`
     font-size: 1.4rem;
     text-transform: uppercase;
   }
+
+  @media screen and (min-width: 768px) {
+    display: block;
+    display:flex;
+  }
 `
 export let Items = styled.ul`
   display:flex;
@@ -38,7 +49,7 @@ export let Items = styled.ul`
   & li{
     height:1.6rem;
     font-size: 1.3rem;
-    margin-left: 1rem;
+    margin-left: .5rem;
   }
 
   & .grande{
@@ -47,6 +58,12 @@ export let Items = styled.ul`
   @media screen and (min-width: 768px) {
     & .grande{
       display: block;
+    }
+
+    & li{
+      height:1.6rem;
+      font-size: 1.3rem;
+      margin-left: 1rem;
     }
   }
 `
@@ -64,5 +81,32 @@ export let Options = styled.div`
   }
   & svg{
     fill: ${({ theme }) => theme.primaryIcon};
+  }
+`
+/* search profile */
+export const AutocompleteProfile = styled(AutoComplete)`
+  & .ant-select-selector{
+    width: 12rem !important;
+    @media screen and (min-width: 768px) {
+      width: 20rem !important;
+    }
+  }
+`
+export const BoxProfile = styled.div`
+  display: flex;
+  padding: .5rem .2rem;
+  background-color: ${({ theme }) => theme.dropHover};
+`
+export const BoxInfo =  styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: .4rem;
+  color: ${({ theme }) => theme.dropSecondary};
+  & label{
+    font-size: 1rem;
+  }
+
+  & span {
+    font-size: .8rem;
   }
 `

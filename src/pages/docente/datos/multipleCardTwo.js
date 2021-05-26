@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { GrAdd } from 'react-icons/gr';
 import Addsesion from './addSesion';
 import Sesion from './sesion';
-import { BodyDatos, BoxDatos, BoxHeaderDatos, CardDatos, FranjaDatos, OptionDato, OptionsDatos } from './style';
-const Multiplecardtwo = ({titulo , datos = []}) => {
+import { BodyDatos, BoxDatos, BoxHeaderDatos, CardDatos, FranjaDatos, OptionDato, OptionsDatos} from './style';
+const Multiplecardtwo = ({titulo , datos = [], autor}) => {
   const [modalForm, setModalForm] = useState(false)
   const [editData, setEditData] = useState(null)
 
@@ -17,18 +17,21 @@ const Multiplecardtwo = ({titulo , datos = []}) => {
       <BoxDatos>
         <BoxHeaderDatos>
           <span>{titulo}</span>
-          <OptionsDatos>
-            <label>Agregar</label>
-            <OptionDato onClick={()=>setModalForm(true)}><GrAdd /></OptionDato>
-          </OptionsDatos>
+          {
+            autor &&
+            <OptionsDatos>
+              <label>Agregar</label>
+              <OptionDato onClick={() => setModalForm(true)}><GrAdd /></OptionDato>
+            </OptionsDatos>
+          }
         </BoxHeaderDatos>
         <BodyDatos>
             {
-              datos.map((ele, i) => <Sesion {...ele} key={i} numero={i} onEdit={() => onEdit(ele)}/>)
+            datos.map((ele, i) => <Sesion autor={autor} {...ele} key={i} numero={i} onEdit={() => onEdit(ele)}/>)
             }
         </BodyDatos>
       </BoxDatos>
-      <Addsesion show={modalForm} onHide={() => setModalForm(false)} editData={editData}/>
+      <Addsesion show={modalForm} onHide={() => setModalForm(false)} editData={editData} clear={() => setEditData(null)}/>
     </CardDatos>
   )
 }
