@@ -5,7 +5,7 @@ import {
 
 import Firebase from 'firebase/app';
 import 'firebase/auth'
-const uri = process.env.REACT_APP_GRAPHQL2
+const uri = process.env.REACT_APP_GRAPHQL
 export const LogIn = createAsyncThunk('user/login', async (datos)=>{
   const auth = await Firebase.auth().signInWithEmailAndPassword("" + datos.email, "" + datos.password)
   const { user: { refreshToken, photoURL}} =  await auth
