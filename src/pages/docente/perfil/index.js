@@ -12,7 +12,6 @@ const Perfil = () => {
     return <Skeleton active/>
   }
   const {alumnos, cursos, ...personales} = data.getOneDocente
-  console.log(data);
   return (
     <>
     <PageHeader

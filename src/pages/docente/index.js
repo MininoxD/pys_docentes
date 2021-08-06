@@ -1,11 +1,8 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import React from 'react'
 import { Outlet } from 'react-router'
-import { useUser } from 'reactfire'
 import NavHeader  from '../../components/NavBar'
-import { refreshUser } from '../../store/token'
 const Docente = () => {
-  const dispatch = useDispatch()
+/*   const dispatch = useDispatch()
   const{data:user} = useUser()
   const refresh =()=>{
     console.log("actualiza token");
@@ -20,7 +17,7 @@ const Docente = () => {
       }, 3.54e+6)
       return () => clearTimeout(timer);
     }
-  }, [user])
+  }, [user]) */
 
   return (
     <>

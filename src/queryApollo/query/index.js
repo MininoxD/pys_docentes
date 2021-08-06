@@ -1,10 +1,37 @@
 import gql from "graphql-tag";
+export const CREATE_DOCENTE = gql`
+mutation CreateDocente($nombres: String!, $dni: String!, $ie: String!, $grado: String!, $celular: String!) {
+  createDocente(
+    nombres: $nombres,
+    dni: $dni,
+    ie: $ie,
+    grado: $grado,
+    rol: 1,
+    celular: $celular
+  ){
+    _id
+    nombres
+    dni
+    rol
+    ie
+    grado
+    celular
+    cursos
+    alumnos{
+      _id
+      nombres
+      dni
+    }
+  }
+}
+`
 export const GET_PROFILE = gql`
     query GetProfile{
       getOneDocente{
         _id
         nombres
         dni
+        rol
         ie
         grado
         celular

@@ -81,6 +81,8 @@ export const BodyProposito = styled.div`
   }
   & span{
     font-size: .8rem;
+    max-width: 300px;
+    max-height: 300px;
   }
 `
 export const TituloSecuencia=  styled.h2`

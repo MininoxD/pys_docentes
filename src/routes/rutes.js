@@ -10,12 +10,13 @@ import Datos from "../pages/docente/datos";
 import Perfil from "../pages/docente/perfil";
 import Searchperfil from '../pages/searchPerfil'
 import Searchdatos from '../pages/searchPerfil/searchDatos'
+import RegisterGoogle from "../pages/auth/registerGoogle";
 const redirect = (rol) => {
   switch (rol) {
     case 1:
       return (<Navigate to='/docente' replace={true} />)
     case 2:
-      return (<Navigate to='/supervisor' replace={true} />)
+      return (<Navigate to='/registersocial' replace={true} />)
     case 3:
       return (<Navigate to='/admin' replace={true} />)
     default:
@@ -41,6 +42,16 @@ export const routes = (loginRol) =>{
             {
               path: '/restore',
               element: <Restore />
+            }
+          ]
+        },
+        {
+          path: '/registersocial',
+          element: loginRol === 2 ? <Authentication /> : <Navigate to='/' replace={true} />,
+          children: [
+            {
+              path: '/',
+              element: <RegisterGoogle />
             }
           ]
         },

@@ -14,13 +14,13 @@ import ProfileSearch from './profileSearch'
 import Usuario from '../../statics/img/usuario.svg'
 const NavHeader = () => {
   const navigate = useNavigate()
-  const {nombre} = useSelector(state => state.user)
+  const { nombre, photo } = useSelector(state => state.user)
   const dispatch = useDispatch()
-
-  const Cerrar =()=>{
-    dispatch(
+  const Cerrar = async()=>{
+    await dispatch(
       LogOut()
     )
+    await window.location.reload()
   }
 
   const menuDrow = [
@@ -56,7 +56,7 @@ const NavHeader = () => {
             <ProfileSearch />
             </li>
             <li>
-            <Avatar size={40} src={Usuario} />
+            <Avatar size={40} src={photo ? photo : Usuario}/>
             </li>
           <li className="grande"><p>{nombre}</p></li>
             <li>

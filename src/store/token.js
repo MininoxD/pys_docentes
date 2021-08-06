@@ -18,6 +18,11 @@ let tokenSlice = createSlice({
     value: '',
     status: ''
   },
+  reducers: {
+    setToken: (state, action) => {
+      state.value = action.payload
+    }
+  },
   extraReducers:{
     [refreshUser.pending]: (state, action) => {
       state.status = 'loading_refreshUser'
@@ -31,5 +36,5 @@ let tokenSlice = createSlice({
     }
   }
 })
-
+export const { setToken } = tokenSlice.actions
 export default tokenSlice.reducer;

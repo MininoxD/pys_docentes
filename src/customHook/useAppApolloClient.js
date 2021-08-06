@@ -1,7 +1,7 @@
 
 import { ApolloClient, createHttpLink, InMemoryCache, ApolloLink } from '@apollo/client';
 import { useToken } from './useToken'
-const uri = process.env.REACT_APP_GRAPHQL
+const uri = process.env.REACT_APP_GRAPHQL2
 const httpLink = new createHttpLink({ uri });
 
 const authMiddleware = (authToken) =>

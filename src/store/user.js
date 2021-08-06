@@ -5,10 +5,10 @@ import {
 
 import Firebase from 'firebase/app';
 import 'firebase/auth'
-const uri = process.env.REACT_APP_GRAPHQL
+const uri = process.env.REACT_APP_GRAPHQL2
 export const LogIn = createAsyncThunk('user/login', async (datos)=>{
   const auth = await Firebase.auth().signInWithEmailAndPassword("" + datos.email, "" + datos.password)
-  const token = await Firebase.auth().currentUser.getIdToken(true)
+  const { user: { refreshToken, photoURL}} =  await auth
   const datosgraphql = await fetch(
     uri,
      {
@@ -16,20 +16,21 @@ export const LogIn = createAsyncThunk('user/login', async (datos)=>{
        headers: {
          'Content-Type': 'application/json',
          'Accept': 'application/json',
-         'Authorization': `${token}`
+         'Authorization': `${refreshToken}`
        },
        body: JSON.stringify({ query: "{ getOneDocente{ nombres rol}}" })
      }
   )
   const {data:{getOneDocente:{rol, nombres}}} = await datosgraphql.json()
-  return {rol, nombres}
+  return { rol, nombres, refreshToken, photoURL}
 })
 
 export const RegisterUser =  createAsyncThunk('user/register', async(data)=>{
   try {
     const user = await Firebase.auth().createUserWithEmailAndPassword('' + data.email, '' + data.password)
-    const { uid, za } = await user.user
-
+    console.log(user);
+    const { refreshToken, photoURL } = user.user
+    console.log(refreshToken);
     const datosgraphql = await fetch(
       uri,
       {
@@ -37,12 +38,11 @@ export const RegisterUser =  createAsyncThunk('user/register', async(data)=>{
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': `${za}`
+          'Authorization': `${refreshToken}`
         },
         body: JSON.stringify({
           query: `mutation{
           createDocente(
-            uid: "${uid}",
             nombres: "${data.nombres}",
             dni:"${data.dni}",
             ie:"${data.ie}",
@@ -58,7 +58,7 @@ export const RegisterUser =  createAsyncThunk('user/register', async(data)=>{
       }
     )
     const { data: { createDocente: { rol, nombres } } } = await datosgraphql.json()
-    return { rol, nombres }
+    return { rol, nombres, refreshToken, photoURL }
   } catch (error) {
     throw error
   }
@@ -75,13 +75,22 @@ let userSlice = createSlice({
   initialState: {
     isLogin: false,
     nombre: '',
+    photo: '',
     rolLogin: null,
     darkmode: false,
+    token:'',
     status: ''
   },
   reducers:{
     setProfile: (state, action) => {
       state.rolLogin = action.payload
+    },
+    setGoogle: (state, action) =>{
+      state.isLogin  = true;
+      state.rolLogin = 2;
+      state.nombre = action.payload.displayName
+      state.photo = action.payload.photoURL
+      state.token = action.payload.refreshToken
     }
   },
   extraReducers :{
@@ -92,6 +101,8 @@ let userSlice = createSlice({
       state.isLogin = true
       state.rolLogin = action.payload.rol
       state.nombre =  action.payload.nombres
+      state.token = action.payload.refreshToken
+      state.photo = action.payload.photoURL
       state.status = 'success_login'
     },
     [LogIn.rejected]: (state, action) => {
@@ -104,6 +115,8 @@ let userSlice = createSlice({
       state.isLogin = false
       state.rolLogin =null
       state.nombre = null
+      state.token = ''
+      state.photo = null
       state.status = 'success_logout'
     },
     [LogOut.rejected]: (state, action) => {
@@ -116,6 +129,8 @@ let userSlice = createSlice({
       state.isLogin = true
       state.rolLogin = action.payload.rol
       state.nombre = action.payload.nombres
+      state.token = action.payload.refreshToken
+      state.photo = action.payload.photoURL
       state.status = 'success_RegisterUser'
     },
     [RegisterUser.rejected]: (state, action) => {
@@ -124,5 +139,5 @@ let userSlice = createSlice({
   }
 })
 
-export const { setProfile} = userSlice.actions
+export const { setProfile, setGoogle} = userSlice.actions
 export default userSlice.reducer;
