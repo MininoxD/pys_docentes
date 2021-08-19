@@ -11,6 +11,9 @@ import Perfil from "../pages/docente/perfil";
 import Searchperfil from '../pages/searchPerfil'
 import Searchdatos from '../pages/searchPerfil/searchDatos'
 import RegisterGoogle from "../pages/auth/registerGoogle";
+import Admin from "../pages/admin";
+import ListDocentes from "../pages/admin/ListDocentes";
+import Especialistas from "../pages/especialista";
 const redirect = (rol) => {
   switch (rol) {
     case 1:
@@ -19,6 +22,8 @@ const redirect = (rol) => {
       return (<Navigate to='/registersocial' replace={true} />)
     case 3:
       return (<Navigate to='/admin' replace={true} />)
+    case 4:
+      return (<Navigate to='/docente' replace={true} />)
     default:
       return (<Navigate to='/' replace={true} />)
   }
@@ -46,6 +51,20 @@ export const routes = (loginRol) =>{
           ]
         },
         {
+          path: '/admin',
+          element: loginRol === 3 ? <Admin/> : <Navigate to='/' replace={true} />,
+          children:[
+            {
+              path: '/',
+              element:<ListDocentes/>
+            },
+            {
+              path: '/perfil',
+              element: <Perfil />
+            },
+          ]
+        },
+        {
           path: '/registersocial',
           element: loginRol === 2 ? <Authentication /> : <Navigate to='/' replace={true} />,
           children: [
@@ -57,7 +76,7 @@ export const routes = (loginRol) =>{
         },
         {
           path: '/docente',
-          element: loginRol === 1 ? <Docente /> : <Navigate to='/' replace={true} />,
+          element: loginRol === 1 || loginRol === 4 ? <Docente /> : <Navigate to='/' replace={true} />,
           children: [
             {
               path: '/',
@@ -74,12 +93,16 @@ export const routes = (loginRol) =>{
             {
               path: '/:id/:idp',
               element: <Datos/>
+            },
+            {
+              path: '/monitoreo',
+              element: loginRol === 4 ? <Especialistas /> : <Navigate to='/docente' replace={true} />
             }
           ]
         },
         {
           path: '/perfil/:id_d',
-          element: loginRol === 1 ? <Searchperfil/>: <Navigate to='/' replace={true} />,
+          element: loginRol === 1 || loginRol === 3 ? <Searchperfil/>: <Navigate to='/' replace={true} />,
           children: [
             {
               path: '/',
@@ -94,7 +117,8 @@ export const routes = (loginRol) =>{
               element: <Datos autor={false}/>
             }
           ]
-        }
+        },
+
       ]
     )
 }

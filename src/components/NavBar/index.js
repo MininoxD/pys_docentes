@@ -12,9 +12,10 @@ import { useNavigate } from 'react-router'
 import gez from '../../statics/img/gez.svg'
 import ProfileSearch from './profileSearch'
 import Usuario from '../../statics/img/usuario.svg'
+import { HiClipboardList} from 'react-icons/hi'
 const NavHeader = () => {
   const navigate = useNavigate()
-  const { nombre, photo } = useSelector(state => state.user)
+  const { nombre, photo, rolLogin } = useSelector(state => state.user)
   const dispatch = useDispatch()
   const Cerrar = async()=>{
     await dispatch(
@@ -29,7 +30,7 @@ const NavHeader = () => {
       iconLeft: <FiUser />,
       title: "Mi Perfil",
       cascade: null,
-      action: () => navigate('/docente/perfil')
+      action: () => navigate('perfil')
     },
     {
       key: "2",
@@ -39,6 +40,18 @@ const NavHeader = () => {
       action: () => Cerrar()
     },
   ]
+
+  if (rolLogin===4){
+    menuDrow.push(
+      {
+        key: "2",
+        iconLeft: <HiClipboardList />,
+        title: "Monitoreo",
+        cascade: null,
+        action: () => navigate('/docente/monitoreo')
+      }
+    )
+  }
   return (
     <HeaderNav>
       <NavBar>

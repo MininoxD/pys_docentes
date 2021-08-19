@@ -1,4 +1,18 @@
 import gql from "graphql-tag";
+
+
+export const GET_DOCENTES = gql`
+  query GetDocentes($rol: Int){
+    getDocentes(rol:$rol){
+      _id
+      nombres
+      dni
+      ie
+      grado
+      celular
+    }
+  }
+`
 export const CREATE_DOCENTE = gql`
 mutation CreateDocente($nombres: String!, $dni: String!, $ie: String!, $grado: String!, $celular: String!) {
   createDocente(
@@ -45,8 +59,8 @@ export const GET_PROFILE = gql`
     }
 `
 export const UPDATE_PROFILE = gql`
-  mutation UpdateProfile($input: Inputdocente!){
-    updateDocente(input: $input){
+  mutation UpdateProfile($input: Inputdocente!, $id: String){
+    updateDocente(input: $input, _id: $id){
       _id
       nombres
       dni
@@ -54,6 +68,7 @@ export const UPDATE_PROFILE = gql`
       grado
       celular
       cursos
+      rol
       alumnos{
         _id
         nombres
@@ -62,6 +77,7 @@ export const UPDATE_PROFILE = gql`
     }
   }
 `
+
 export const ADD_ALUMNO = gql`
   mutation AddAlumno($nombres: String!, $dni: String!){
     createAlumno(nombres: $nombres, dni: $dni){
@@ -441,6 +457,7 @@ export const GET_DOCENTE_ID = gql`
       nombres
       ie
       grado
+      rol
       proyectos{
         _id
         nombre
@@ -450,6 +467,46 @@ export const GET_DOCENTE_ID = gql`
         enfoque
         situacion
       }
+    }
+  }
+`
+
+export const GET_ITEMS_EVALUACION = gql`
+  query GetItemsEvaluacion{
+    getEvidencias{
+      _id
+      item
+      evidencia
+    }
+    getPedagogia{
+      _id
+      item
+      evidencia
+    }
+  }
+`
+
+export const ADD_PEDAGOGIA_SUP =  gql`
+  mutation CreatePedagogia($item: String!, $evidencia: String!) {
+    createPedagogicaSup(
+      item : $item,
+      evidencia: $evidencia
+    ){
+      _id
+      item
+      evidencia
+    }
+  }
+`
+export const ADD_EVIDENCIA_SUP =  gql`
+  mutation CreateEvidenciaSup($item: String!, $evidencia: String!) {
+      createEvidenciaSup(
+      item : $item,
+      evidencia: $evidencia
+    ){
+      _id
+      item
+      evidencia
     }
   }
 `
