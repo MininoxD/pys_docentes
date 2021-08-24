@@ -55,7 +55,7 @@ const NavHeader = () => {
   return (
     <HeaderNav>
       <NavBar>
-          <Logo>
+          <Logo onClick={() => navigate('/docente')}>
             <span><IoDocumentAttachSharp/></span>
           <Image
             width={70}

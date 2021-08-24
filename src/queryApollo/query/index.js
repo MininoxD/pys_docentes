@@ -115,6 +115,9 @@ export const GET_PROYECTOS = gql`
       fecha_fin
       enfoque
       situacion
+      supervicion{
+        _id
+      }
     }
   }
 `;
@@ -466,6 +469,9 @@ export const GET_DOCENTE_ID = gql`
         fecha_fin
         enfoque
         situacion
+        supervicion{
+          _id
+        }
       }
     }
   }
@@ -507,6 +513,99 @@ export const ADD_EVIDENCIA_SUP =  gql`
       _id
       item
       evidencia
+    }
+  }
+`
+
+
+export const DELETE_EVIDENCIA_SUP = gql`
+  mutation DeleteEvidenciaSup($_id: String!){
+    deleteEvidenciaSup(_id: $_id){
+        _id
+        item
+        evidencia
+    }
+  }
+`
+export const DELETE_PEDAGOGIA_SUP = gql`
+  mutation DeletePedagogicaSup($_id: String!){
+    deletePedagogicaSup(_id: $_id){
+        _id
+        item
+        evidencia
+    }
+  }
+`
+
+
+export const GET_ONE_SUPERVERCION = gql`
+  query GetSupervicion($_id: String!){
+    getOneSupervicion(_id:$_id){
+      docente{
+        _id
+        nombres
+        dni
+        ie
+        grado
+        celular
+      }
+      proyecto{
+        nombre
+        grado
+        fecha_inicio
+        fecha_fin
+      }
+      supervisor{
+        _id
+        nombres
+        dni
+        celular
+      }
+      evidencias{
+        _id
+        item
+        estado
+        evidencia
+        anotaciones
+      }
+      pedagogicos{
+        _id
+        item
+        estado
+        evidencia
+        anotaciones
+      }
+    }
+  }
+`
+export const UPDATE_ITEM_EVIDENCIA = gql`
+  mutation UpdateEvidenciaSup($_id: String!,$input:InputSupervisar! ){
+    updateItemEvidencia(_id: $_id, input: $input){
+      _id
+      item
+      estado
+      evidencia
+      anotaciones
+    }
+  }
+`
+
+export const UPDATE_ITEM_PEDAGOGICO = gql`
+  mutation UpdatePedagogicoSup($_id: String!,$input:InputSupervisar! ){
+      updateItemPedagogico(_id: $_id, input: $input){
+      _id
+      item
+      estado
+      evidencia
+      anotaciones
+    }
+  }
+`
+
+export const CREATE_SUPERVICION = gql`
+  mutation CreateSupervicion($id_docente: String!, $id_proyecto:String!){
+    createSupervision(id_docente: $id_docente, id_proyecto: $id_proyecto){
+      _id
     }
   }
 `

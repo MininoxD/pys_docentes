@@ -9,16 +9,17 @@ const Formitems = ({ show, onHide, status}) => {
   const { register, handleSubmit, formState: { errors }} = useForm();
   const [addPedagogia] = useMutation(ADD_PEDAGOGIA_SUP, {
     refetchQueries: [
-    {
-      query: GET_ITEMS_EVALUACION
-    },
+      {
+        query: GET_ITEMS_EVALUACION,
+      }
     ]
   })
 
   const [addEvidencia] = useMutation(ADD_EVIDENCIA_SUP, {
-    refetchQueries: [{
-      query: GET_ITEMS_EVALUACION
-    }
+    refetchQueries: [
+      {
+        query: GET_ITEMS_EVALUACION,
+      }
     ]
   })
 

@@ -14,6 +14,7 @@ import RegisterGoogle from "../pages/auth/registerGoogle";
 import Admin from "../pages/admin";
 import ListDocentes from "../pages/admin/ListDocentes";
 import Especialistas from "../pages/especialista";
+import Supervicion from "../pages/especialista/supervicion";
 const redirect = (rol) => {
   switch (rol) {
     case 1:
@@ -97,12 +98,16 @@ export const routes = (loginRol) =>{
             {
               path: '/monitoreo',
               element: loginRol === 4 ? <Especialistas /> : <Navigate to='/docente' replace={true} />
-            }
+            },
+            {
+              path: '/monitoreo/:id_super',
+              element: loginRol === 4 ? <Supervicion /> : <Navigate to='/docente' replace={true} />
+            },
           ]
         },
         {
           path: '/perfil/:id_d',
-          element: loginRol === 1 || loginRol === 3 ? <Searchperfil/>: <Navigate to='/' replace={true} />,
+          element: loginRol === 1 || loginRol === 4 || loginRol === 3 ? <Searchperfil/>: <Navigate to='/' replace={true} />,
           children: [
             {
               path: '/',
@@ -117,8 +122,7 @@ export const routes = (loginRol) =>{
               element: <Datos autor={false}/>
             }
           ]
-        },
-
+        }
       ]
     )
 }

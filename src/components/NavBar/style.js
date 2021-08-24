@@ -23,6 +23,7 @@ export let NavBar = styled.nav`
   align-items: center;
 `
 export let Logo = styled.div`
+  cursor: pointer;
   display:flex;
   display: none;
   align-items:center;

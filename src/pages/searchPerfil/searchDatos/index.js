@@ -9,7 +9,7 @@ import { useParams } from 'react-router';
 
 const PerfilProyectos = () => {
   const {id_d} = useParams()
-  const { loading, error, data } = useQuery(GET_DOCENTE_ID, {variables:{id:id_d}})
+  const { loading, error, data } = useQuery(GET_DOCENTE_ID, {variables:{id:id_d}, fetchPolicy: 'network-only'})
   if (loading){
     return(<Skeleton active/>)
   }
@@ -17,14 +17,14 @@ const PerfilProyectos = () => {
     return <h1>Actualizando</h1>
   }
 
-  const {  proyectos, ...datosper} = data.getDocenteId
+  const { _id: id_docente , proyectos, ...datosper} = data.getDocenteId
 
   return (
     <>
       <Searchdatospersonales {...datosper}/>
       <GridProy>
         {
-          proyectos.map((pro, i)=><Searchproyectos key={i} {...pro}/>)
+          proyectos.map((pro, i) => <Searchproyectos key={i} {...pro} id_docente={id_docente}/>)
         }
       </GridProy>
     </>
