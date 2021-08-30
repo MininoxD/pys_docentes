@@ -7,13 +7,15 @@ import { useSelector } from 'react-redux'
 import { useMutation } from '@apollo/client'
 import { UPDATE_PROFILE } from '../../../queryApollo/query'
 const Searchdatospersonales = ({ _id, nombres, ie, grado, rol}) => {
+  console.log(_id);
+  console.log(rol);
   const { rolLogin } = useSelector(state => state.user)
   const [updateProfile] = useMutation(UPDATE_PROFILE)
   const navigate = useNavigate()
   const confirEspecialista = () => {
     updateProfile({
       variables:{
-        id: _id,
+        id:_id,
         input: { rol: 4}
       }
     })
@@ -21,7 +23,7 @@ const Searchdatospersonales = ({ _id, nombres, ie, grado, rol}) => {
   const quitarEspecialista = () => {
     updateProfile({
       variables: {
-        id: _id,
+        id:_id,
         input: { rol: 1 }
       }
     })

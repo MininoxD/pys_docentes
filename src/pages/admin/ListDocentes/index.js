@@ -4,7 +4,7 @@ import { GET_DOCENTES } from '../../../queryApollo/query';
 import { List, Skeleton, Divider, Descriptions } from 'antd';
 import { ContainerListDocentes } from '../../auth/registerGoogle/style';
 const ListDocentes = () => {
-  const { loading, error, data } = useQuery(GET_DOCENTES, { fetchPolicy: 'no-cache' , variables: { rol: 4}});
+  const { loading, error, data } = useQuery(GET_DOCENTES, { fetchPolicy: 'network-only' , variables: { rol: 4}});
   console.log(data);
   if (loading){
     return(

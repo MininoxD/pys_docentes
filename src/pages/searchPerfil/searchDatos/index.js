@@ -21,7 +21,7 @@ const PerfilProyectos = () => {
 
   return (
     <>
-      <Searchdatospersonales {...datosper}/>
+      <Searchdatospersonales {...datosper} _id={id_docente}/>
       <GridProy>
         {
           proyectos.map((pro, i) => <Searchproyectos key={i} {...pro} id_docente={id_docente}/>)
