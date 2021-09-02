@@ -603,9 +603,7 @@ export const UPDATE_ITEM_PEDAGOGICO = gql`
 `
 
 export const CREATE_SUPERVICION = gql`
-  mutation CreateSupervicion($id_docente: String!, $id_proyecto:String!){
-    createSupervision(id_docente: $id_docente, id_proyecto: $id_proyecto){
-      _id
-    }
+  mutation CreateSupervicion($id_docente: String!,$id_proyecto:String!){
+    createSupervision(id_docente: $id_docente, id_proyecto: $id_proyecto)
   }
 `

@@ -14,7 +14,7 @@ const Searchproyectos = ({ _id, grado, fecha_inicio, fecha_fin, nombre, enfoque,
   let f_fin = new Date(fecha_fin * 1).toISOString().substring(0, 10)
   const [createSupervicion] = useMutation(CREATE_SUPERVICION,{
     onCompleted:(data)=>{
-      navigate(`/docente/monitoreo/${data.createSupervision._id}`)
+      navigate(`/docente/monitoreo/${data.createSupervision}`)
     }
   })
   const navigate = useNavigate()
