@@ -40,7 +40,7 @@ const Searchproyectos = ({ _id, grado, fecha_inicio, fecha_fin, nombre, enfoque,
             <FcFolder />
           </span>
           <InfoProy>
-            <span className="nombre">{grado}</span>
+            <span className="nombre">Grado: {grado}</span>
             <span className="duracion">Inicio: {f_ini}{" "} Fin: {f_fin}</span>
           </InfoProy>
         </BoxInfo>

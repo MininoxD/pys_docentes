@@ -12,7 +12,7 @@ const HeaderPropositos = ({ nombre, situacion, enfoque, onShow, autor}) => {
       <PageHeader
         className="site-page-header"
         onBack={() => navigate(autor ? `/docente` : `/perfil/${id_d}`)}
-        title={`${nombre}`}
+        title={`Nombre del proyecto: ${nombre}`}
       />
       <Descriptions title="Decripcion del Proposito" bordered>
         <Descriptions.Item label="Situacion Significativa" span={3}>

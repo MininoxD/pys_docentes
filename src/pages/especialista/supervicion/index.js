@@ -113,7 +113,10 @@ const Supervicion = () => {
     }
   ];
   const { docente, proyecto, supervisor, evidencias, pedagogicos } = data.getOneSupervicion
+  let f_ini = new Date(proyecto.fecha_inicio * 1).toISOString().substring(0, 10)
+  let f_fin = new Date(proyecto.fecha_fin * 1).toISOString().substring(0, 10)
   return (
+
     <ContainerSupervicion>
       <PageHeader
         className="site-page-header"
@@ -128,8 +131,8 @@ const Supervicion = () => {
         <Descriptions.Item label="Celular">{docente.celular}</Descriptions.Item>
         <Descriptions.Item label="DNI">{docente.dni}</Descriptions.Item>
         <Descriptions.Item label="Nombre del Proyecto">{proyecto.nombre}</Descriptions.Item>
-        <Descriptions.Item label="Fecha Inicio">{proyecto.fecha_inicio}</Descriptions.Item>
-        <Descriptions.Item label="Fecha FIn">{proyecto.fecha_fin}</Descriptions.Item>
+        <Descriptions.Item label="Fecha Inicio proyecto">{f_ini}</Descriptions.Item>
+        <Descriptions.Item label="Fecha FIn proyecto">{f_fin}</Descriptions.Item>
         <Descriptions.Item label="Nombre del Supervisor">{supervisor.nombres}</Descriptions.Item>
         <Descriptions.Item label="DNI Supervisor">{supervisor.dni}</Descriptions.Item>
         <Descriptions.Item label="Celular supervisor">{supervisor.celular}</Descriptions.Item>

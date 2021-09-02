@@ -66,8 +66,8 @@ const Getproyectos = () => {
                 <FcFolder/>
               </span>
               <InfoProy>
-                <span className="nombre">{grado}</span>
-                   <span className="duracion">Inicio: {f_ini}{" "} Fin: {f_fin}</span>
+                <span className="nombre">Grado: {grado}</span>
+                <span className="duracion">Inicio: {f_ini}{" "} Fin: {f_fin}</span>
               </InfoProy>
           </BoxInfo>
           <CardOptions>
